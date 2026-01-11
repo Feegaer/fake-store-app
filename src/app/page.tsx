@@ -1,5 +1,5 @@
+import Products from "./products/page";
+
 export default function Home() {
-  return (
-    <main className="p-4">Fake Store App</main>
-  );
+  return <Products />;
 }
