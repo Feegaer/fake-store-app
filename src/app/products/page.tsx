@@ -1,20 +1,22 @@
 "use client";
 
-import Card from "@/app/components/Card";
 import { useState, useEffect } from "react";
 import { Product } from "@/domain/entities/Product";
 import { ProductRepository } from "@/infrastructure/repository/ProductRepository";
 
+import Card from "@/app/components/Card";
+import Carousel from "@/app/components/Carousel";
+
 export default function Products() {
 
-  const productRepository = new ProductRepository();
-  const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState<Product[]>([]);
+  const productRepository = new ProductRepository(); // Access to API data objects
+  const [loading, setLoading] = useState(true); // Loading state
+  const [products, setProducts] = useState<Product[]>([]); // Products state
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
-      const products = await productRepository.getAll();
+      const products = await productRepository.getAll(); // Fetch products from API
       setProducts(products);
       setLoading(false);
     };
@@ -37,9 +39,11 @@ export default function Products() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="flex flex-wrap gap-4">
-          {mappedProducts}
-        </div>
+        <Carousel
+          title="Products"
+          children={mappedProducts}
+          elementsPerPage={6}
+        />
       )}
     </>
   );

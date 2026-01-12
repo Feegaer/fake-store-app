@@ -1,5 +1,9 @@
 import Products from "./products/page";
 
 export default function Home() {
-  return <Products />;
+  return (
+    <div>
+      <a href="/products">Products</a>
+    </div>
+  );
 }
